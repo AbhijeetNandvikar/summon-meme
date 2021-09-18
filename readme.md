@@ -9,5 +9,6 @@
   - open: To open downloaded image
   - terminal-image: Displays png/jpg images in terminal.
   - chalk: To beautify the terminal output.
+  - yargs: Yargs helps you build interactive command line tools, by parsing arguments and generating an elegant user interface.
 - create index.js file and add `#! usr/bin/env node` at the start of this file, this string is called hashbang.
 - update the bin field in package.json as given here.
