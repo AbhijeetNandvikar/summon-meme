@@ -1,14 +1,18 @@
-### This is a fun cli app which shows you a new meme from reddit and much more...
+## summon-meme is a fun cli app which shows you a new meme from reddit and much more...
 
-### Steps I followed to buid this...
+## There are two main commands
 
-- init package.json
-- init git repo/add .gitignore
-- install required packages...
-  - node-fetch: A light weight tool to make fetch request from node environment.
-  - open: To open downloaded image
-  - terminal-image: Displays png/jpg images in terminal.
-  - chalk: To beautify the terminal output.
-  - yargs: Yargs helps you build interactive command line tools, by parsing arguments and generating an elegant user interface.
-- create index.js file and add `#! usr/bin/env node` at the start of this file, this string is called hashbang.
-- update the bin field in package.json as given here.
+1. get-meme: will open a ramdom meme for you.
+2. help: will show how to use it.
+
+## User can customize the output by passing multiple arguments eg: subreddit name, number of memes you want to fetch
+
+User have to specify the type of argument using flags.
+eg: get-meme cat --subreddit here cat is the name of subreddit
+eg: get-meme cat 4 --subreddit --count Here 4 is number of image you want to fetch
+
+## Other important flags are
+
+1. --save: to save a meme to local machine
+2. --visit: to open the meme post on reddit
+3. --json: to print the result to console
