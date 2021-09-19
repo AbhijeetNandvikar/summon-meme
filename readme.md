@@ -1,5 +1,20 @@
 ## summon-meme is a fun cli app which shows you a new meme from reddit and much more...
 
+## Installation:
+
+```
+npm i summon-meme -g
+summon-meme
+```
+
+### Or to use it directly run following command:
+
+```
+npx summon-meme
+```
+
+the program will start running
+
 ## There are two main commands
 
 1. get-meme: will open a ramdom meme for you.
