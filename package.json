@@ -2,7 +2,6 @@
   "name": "summon-meme",
   "version": "1.0.0",
   "description": "This is a fun cli app which shows you a new meme from reddit and much more...",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +9,7 @@
   "author": "Abhijeet Nandvikar",
   "license": "ISC",
   "bin": {
-    "summon-meme": "./index.js"
+    "summon-meme": "./src/index.js"
   },
   "dependencies": {
     "chalk": "^4.1.2",
