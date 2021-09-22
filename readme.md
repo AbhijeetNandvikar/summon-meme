@@ -1,5 +1,7 @@
 ### This package is a fun CLI app which serves you fresh memes anytime...
 
+![summon-meme](./summon-meme-demo.gif)
+
 **Installation:**
 
 ```
@@ -17,7 +19,7 @@ the program will start running
 
 **Note: This app works with node version 14 and above because it uses ES module syntax.**
 
-**There are two main commands**
+**There are three main commands**
 
 1.  **get-meme:** To open a ramdom meme for you.
 2.  **help:** Shows how to use the app.
