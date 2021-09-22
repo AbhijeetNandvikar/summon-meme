@@ -19,8 +19,9 @@ the program will start running
 
 **There are two main commands**
 
-1. get-meme: will open a ramdom meme for you.
-2. help: will show how to use it.
+1.  **get-meme:** To open a ramdom meme for you.
+2.  **help:** Shows how to use the app.
+3.  **exit:** To exit the app.
 
 **User can customize the output by passing multiple arguments eg: subreddit name, number of memes you want to fetch**
 
@@ -31,6 +32,8 @@ User have to specify the type of argument using flags.
 
 **Other important flags are**
 
-1. --save: to save the meme to local machine
-2. --visit: to open the meme post on reddit
-3. --json: to print the result to console
+1. **--save:** to save the meme to local machine.
+2. **--visit:** to open the meme post on reddit.
+3. **--json:** to print the result to console.
+
+**I am using meme API made by https://github.com/D3vd/Meme_Api. Check out this page to learn more about it**
