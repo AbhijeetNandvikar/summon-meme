@@ -1,6 +1,6 @@
 ### This package is a fun CLI app which serves you fresh memes anytime...
 
-![summon-meme](./summon-meme-demo.gif)
+![summon-meme](https://s9.gifyu.com/images/summon-meme-demo-1.gif)
 
 **Installation:**
 
