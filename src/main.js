@@ -16,7 +16,7 @@ const main = (input) => {
   // main commands
   if (inputArr[0] === "get-meme") {
     let actionPipeline = createActionsPipeline(flagArr);
-    console.log("action pipeline =>", actionPipeline);
+    console.log(`\n` + "action pipeline =>", actionPipeline);
     executeActions(actionPipeline, inputArr);
   } else if (inputArr[0] === "help") {
     console.log(
@@ -66,18 +66,29 @@ const main = (input) => {
       chalk.yellow.bold("3. --json: ") +
         chalk.yellow("to print the result to console")
     );
+    process.stdout.write(chalk.green.bold("summon-meme: $ "));
+  } else if (inputArr[0] === "exit") {
+    process.stdout.write(
+      `\n` +
+        "Thanks for using this app!!" +
+        `\n` +
+        "Visit " +
+        chalk.yellow("https://github.com/AbhijeetNandvikar/summon-meme") +
+        " to check source code, leave a start if you like this project." +
+        "\n"
+    );
+    process.stdin.pause();
   } else {
     console.log(
       chalk.red.bold(
         "\n" + "please enter a valid command, for more info type 'help'" + "\n"
       )
     );
+    process.stdout.write(chalk.green.bold("summon-meme: $ "));
   }
 };
 
 const executeActions = async (cmdArr, inputArr) => {
-  console.log(cmdArr, inputArr);
-  console.log(cmdArr.indexOf("ADD_SUBREDDIT"));
   let subreddit =
     cmdArr.indexOf("ADD_SUBREDDIT") !== -1
       ? inputArr[cmdArr.indexOf("ADD_SUBREDDIT") + 1]
@@ -87,7 +98,6 @@ const executeActions = async (cmdArr, inputArr) => {
       ? inputArr[cmdArr.indexOf("ADD_COUNT") + 1]
       : undefined;
   let data = await (await getRedditData(subreddit, count)).json();
-  console.log(subreddit, count, data);
   try {
     for (let i = 0; i < cmdArr.length; i++) {
       try {
@@ -134,7 +144,6 @@ const createActionsPipeline = (flags) => {
   let actionPipeline = [];
   //   actionPipeline.push("GET_MEME")
   flags?.forEach((flag) => {
-    console.log(flag);
     switch (flag) {
       case "--subreddit": {
         actionPipeline.push("ADD_SUBREDDIT");
@@ -150,6 +159,9 @@ const createActionsPipeline = (flags) => {
       }
       case "--save": {
         actionPipeline.push("DOWNLOAD");
+      }
+      case "--visit": {
+        actionPipeline.push("VISIT_PAGE");
       }
     }
   });

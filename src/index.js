@@ -26,14 +26,16 @@ process.stdin.on("keypress", function (ch, key) {
     process.stdin.pause();
   } else if (key && key.name === "return") {
     // call main function on pressing enter
-    main(inputString);
+    if (inputString.length) main(inputString);
     inputString = "";
-    process.stdout.write(`\n` + chalk.green.bold("summon-meme: $ "));
+    // process.stdout.write(`\n` + chalk.green.bold("summon-meme: $ "));
   } else if (key && key.name == "backspace") {
     // clearline on pressing backspace
-    inputString = "";
+    inputString = inputString.slice(0, -1);
     process.stdout.clearLine("\r");
-    process.stdout.write(`\r` + chalk.green.bold("summon-meme: $ "));
+    process.stdout.write(
+      `\r` + chalk.green.bold("summon-meme: $ ") + inputString
+    );
   } else if (ch) {
     // output character
     inputString = inputString += ch;
