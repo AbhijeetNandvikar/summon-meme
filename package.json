@@ -12,6 +12,10 @@
   "bin": {
     "summon-meme": "./src/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbhijeetNandvikar/summon-meme"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "keypress": "^0.2.1",

@@ -6,8 +6,11 @@ import keypress from "keypress";
 import chalk from "chalk";
 import fs from "fs";
 
-const getRedditData = (subReddit = "wholesomememes", count = 1) => {
-  return fetch(`https://meme-api.com/gimme/${subReddit}/${count}`);
+const getRedditData = async (subReddit = "wholesomememes", count = 1) => {
+  const results = await fetch(
+    `https://meme-api.com/gimme/${subReddit}/${count}`
+  );
+  return results.json();
 };
 
 const main = (input) => {
@@ -89,54 +92,58 @@ const main = (input) => {
 };
 
 const executeActions = async (cmdArr, inputArr) => {
-  let subreddit =
-    cmdArr.indexOf("ADD_SUBREDDIT") !== -1
-      ? inputArr[cmdArr.indexOf("ADD_SUBREDDIT") + 1]
-      : undefined;
-  let count =
-    cmdArr.indexOf("ADD_COUNT") !== -1
-      ? inputArr[cmdArr.indexOf("ADD_COUNT") + 1]
-      : undefined;
-  let data = await (await getRedditData(subreddit, count)).json();
   try {
-    for (let i = 0; i < cmdArr.length; i++) {
-      try {
-        switch (cmdArr[i]) {
-          case "PRINT_RESULT_JSON": {
-            console.log(data);
-            break;
-          }
-          case "DOWNLOAD": {
-            downloadImageWrapper(data);
-            break;
-          }
-          case "OPEN_IMAGE": {
-            // console.log("api result =>", data);
-            openImages(data);
-            // data?.memes?.forEach(async (url) => {});
+    let subreddit =
+      cmdArr.indexOf("ADD_SUBREDDIT") !== -1
+        ? inputArr[cmdArr.indexOf("ADD_SUBREDDIT") + 1]
+        : undefined;
+    let count =
+      cmdArr.indexOf("ADD_COUNT") !== -1
+        ? inputArr[cmdArr.indexOf("ADD_COUNT") + 1]
+        : undefined;
+    let data = await getRedditData(subreddit, count);
+    try {
+      for (let i = 0; i < cmdArr.length; i++) {
+        try {
+          switch (cmdArr[i]) {
+            case "PRINT_RESULT_JSON": {
+              console.log(data);
+              break;
+            }
+            case "DOWNLOAD": {
+              downloadImageWrapper(data);
+              break;
+            }
+            case "OPEN_IMAGE": {
+              // console.log("api result =>", data);
+              openImages(data);
+              // data?.memes?.forEach(async (url) => {});
 
-            break;
+              break;
+            }
+            case "VISIT_PAGE": {
+              visitPage(data);
+              break;
+            }
           }
-          case "VISIT_PAGE": {
-            visitPage(data);
-            break;
-          }
+        } catch (err) {
+          chalk.red.bold("Opps! error occured") + `\n` + "message:" + err;
         }
-      } catch (err) {
-        chalk.red.bold("Opps! error occured") + `\n` + "message:" + err;
       }
+      process.stdout.write(chalk.green.bold("summon-meme: $ "));
+    } catch (err) {
+      console.log(
+        chalk.red.bold("Opps! error occured") + `\n` + "message:" + err
+      );
+      console.log(
+        chalk.red.bold(
+          "please report this issue at https://github.com/AbhijeetNandvikar/summon-meme"
+        )
+      );
+      process.stdout.write(chalk.green.bold("summon-meme: $ "));
     }
-    process.stdout.write(chalk.green.bold("summon-meme: $ "));
-  } catch (err) {
-    console.log(
-      chalk.red.bold("Opps! error occured") + `\n` + "message:" + err
-    );
-    console.log(
-      chalk.red.bold(
-        "please report this issue at https://github.com/AbhijeetNandvikar/summon-meme"
-      )
-    );
-    process.stdout.write(chalk.green.bold("summon-meme: $ "));
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -170,26 +177,34 @@ const createActionsPipeline = (flags) => {
 };
 
 const openImages = async (data) => {
-  if (data.memes) {
-    for (let j = 0; j < data?.memes?.length; j++) {
-      await open(data?.memes[j]?.url, {
-        app: {
-          name: [open.apps.chrome, open.apps.firefox, open.apps.edge],
-        },
-      });
+  try {
+    if (data.memes) {
+      for (let j = 0; j < data?.memes?.length; j++) {
+        await open(data?.memes[j]?.url, {
+          app: {
+            name: [open.apps.chrome, open.apps.firefox, open.apps.edge],
+          },
+        });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 };
 
 const visitPage = async (data) => {
-  if (data.memes) {
-    for (let j = 0; j < data?.memes?.length; j++) {
-      await open(data?.memes[j]?.postLink, {
-        app: {
-          name: [open.apps.chrome, open.apps.firefox, open.apps.edge],
-        },
-      });
+  try {
+    if (data.memes) {
+      for (let j = 0; j < data?.memes?.length; j++) {
+        await open(data?.memes[j]?.postLink, {
+          app: {
+            name: [open.apps.chrome, open.apps.firefox, open.apps.edge],
+          },
+        });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -202,12 +217,16 @@ const downloadImageWrapper = (data) => {
 };
 
 async function download(name, url) {
-  const response = await fetch(url);
-  const buffer = await response.buffer();
-  fs.writeFile(`./${name}.jpg`, buffer, () => {
-    console.log("finished downloading!");
-    process.stdout.write(chalk.green.bold("summon-meme: $ "));
-  });
+  try {
+    const response = await fetch(url);
+    const buffer = await response.buffer();
+    fs.writeFile(`./${name}.jpg`, buffer, () => {
+      console.log("finished downloading!");
+      process.stdout.write(chalk.green.bold("summon-meme: $ "));
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default main;
