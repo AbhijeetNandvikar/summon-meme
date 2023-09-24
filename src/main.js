@@ -7,7 +7,7 @@ import chalk from "chalk";
 import fs from "fs";
 
 const getRedditData = (subReddit = "wholesomememes", count = 1) => {
-  return fetch(`https://meme-api.herokuapp.com/gimme/${subReddit}/${count}`);
+  return fetch(`https://meme-api.com/gimme/${subReddit}/${count}`);
 };
 
 const main = (input) => {
