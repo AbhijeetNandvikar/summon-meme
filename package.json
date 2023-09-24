@@ -1,6 +1,6 @@
 {
   "name": "summon-meme",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "This is a fun cli aßpp which shows you a new meme from reddit and much more...",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
