@@ -1,4 +1,4 @@
-### This package is a fun CLI app which serves you fresh memes anytime...
+### This is a fun CLI app that serves you fresh memes anytime.
 
 ![summon-meme](https://github.com/AbhijeetNandvikar/summon-meme/blob/7b65da2e1d33dc772de7e9a3a80c533114619053/summon-meme-demo.gif?raw=true)
 
@@ -38,4 +38,4 @@ User have to specify the type of argument using flags.
 2. **--visit:** to open the meme post on reddit.
 3. **--json:** to print the result to console.
 
-**I am using meme API made by https://github.com/D3vd/Meme_Api. Check out this page to learn more about it**
+**This is made using following API https://meme-api.com/gimme. Check out this page to learn more about it https://github.com/D3vd/Meme_Api**
